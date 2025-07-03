@@ -68,4 +68,5 @@ jobs:
 
       - name: "Start Building"
         run: |
-            sudo arch-chroot /mnt/arch bash -c "cd /Aurora-Runtime && ./build.sh"
+          sudo arch-chroot /mnt/arch bash -c "cd /Aurora-Runtime && chmod +x build.sh"
+          sudo arch-chroot /mnt/arch bash -c "cd /Aurora-Runtime && ./build.sh"
