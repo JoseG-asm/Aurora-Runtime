@@ -1,0 +1,20 @@
+[binaries]
+pkg-config = '/usr/bin/pkg-config'
+cmake = '/usr/bin/cmake'
+
+c = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang'
+cpp = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang++'
+ar = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
+strip = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'aarch64'
+cpu = 'aarch64'
+endian = 'little'
+
+[properties]
+skip_sanity_check = true
+c_args = ['-I/usr/include', '-I/usr/include/GL']
+c_link_args = ['-L/usr/lib/x86_64-linux-gnu']
+

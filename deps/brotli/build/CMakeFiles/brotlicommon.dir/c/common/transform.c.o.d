@@ -1,0 +1,20 @@
+CMakeFiles/brotlicommon.dir/c/common/transform.c.o: \
+  /home/josegasm/aurora-runtime/deps/brotli/c/common/transform.c \
+  /home/josegasm/aurora-runtime/deps/brotli/c/common/transform.h \
+  /home/josegasm/aurora-runtime/deps/brotli/c/include/brotli/port.h \
+  /home/josegasm/aurora-runtime/deps/brotli/c/include/brotli/types.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/stddef.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_header_macro.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_ptrdiff_t.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_size_t.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_wchar_t.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_null.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_max_align_t.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/__stddef_offsetof.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/20/include/stdint.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdint.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/cdefs.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/versioning.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/api-level.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/ndk-version.h \
+  /home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/wchar_limits.h

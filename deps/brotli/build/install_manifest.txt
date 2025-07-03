@@ -1,0 +1,12 @@
+/home/josegasm/aurora-runtime/workdir/bin/brotli
+/home/josegasm/aurora-runtime/workdir/lib/libbrotlienc.so
+/home/josegasm/aurora-runtime/workdir/lib/libbrotlidec.so
+/home/josegasm/aurora-runtime/workdir/lib/libbrotlicommon.so
+/home/josegasm/aurora-runtime/workdir/include/brotli/shared_dictionary.h
+/home/josegasm/aurora-runtime/workdir/include/brotli/port.h
+/home/josegasm/aurora-runtime/workdir/include/brotli/types.h
+/home/josegasm/aurora-runtime/workdir/include/brotli/decode.h
+/home/josegasm/aurora-runtime/workdir/include/brotli/encode.h
+/home/josegasm/aurora-runtime/workdir/lib/pkgconfig/libbrotlicommon.pc
+/home/josegasm/aurora-runtime/workdir/lib/pkgconfig/libbrotlidec.pc
+/home/josegasm/aurora-runtime/workdir/lib/pkgconfig/libbrotlienc.pc
