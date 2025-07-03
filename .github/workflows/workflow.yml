@@ -59,7 +59,7 @@ jobs:
           echo ""
           
           echo "Downloading mingw..."
-          --output "build-env/$MINGW_FILENAME" -#L "$MINGW_URL"
+          curl --output "build-env/$MINGW_FILENAME" -#L "$MINGW_URL"
           echo "Unpacking mingw..."
           tar -xf "build-env/$MINGW_FILENAME" -C "build-env"
           mv "build-env/$(tar -tf "build-env/$MINGW_FILENAME" | cut -d "/" -f 1 | head -n 1)/$(tar -tf "build-env/$MINGW_FILENAME" | cut -d "/" -f 2 | head -n 1)" "build-env/mingw"
