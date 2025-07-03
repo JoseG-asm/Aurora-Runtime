@@ -65,6 +65,8 @@ jobs:
           mv "cache/$(tar -tf "cache/$MINGW_FILENAME" | cut -d "/" -f 1 | head -n 1)/$(tar -tf "cache/$MINGW_FILENAME" | cut -d "/" -f 2 | head -n 1)" "cache/mingw"
           rm -f "cache/$MINGW_FILENAME"
           echo "" 	
+          
+          ls "cache/mingw" && ls "cache/android-ndk"
 
       - name: "Start Building"
         run: |
