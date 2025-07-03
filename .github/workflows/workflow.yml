@@ -43,6 +43,8 @@ jobs:
           sudo chmod 755 -R /mnt/arch/system
       - name: "Download mingw-llvm red rose and ndk"
         run: |
+          mkdir -p cache
+      
           export NDK_URL="https://dl.google.com/android/repository/android-ndk-r29-beta2-linux.zip"
           export NDK_FILENAME="android-ndk-r29-beta2-linux.zip"
           export MINGW_URL="http://techer.pascal.free.fr/Red-Rose_MinGW-w64-Toolchain/Red-Rose-MinGW-w64-Posix-Urct-v12.0.0.r458.g03d8a40f5-Gcc-11.5.0.tar.xz"
