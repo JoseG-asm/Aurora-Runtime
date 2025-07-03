@@ -51,17 +51,21 @@ jobs:
           export MINGW_FILENAME="mingw.tar.xz"
 
           echo "Downloading NDK..."
-          curl --output "$NDK_FILENAME" -#L "$NDK_URL"
-          unzip -q "$NDK_FILENAME" -d build-env
-          mv build-env/$(unzip -Z1 "$NDK_FILENAME" | head -n 1 | cut -d '/' -f 1) build-env/android-ndk
-          rm -f "$NDK_FILENAME"
-
-          echo "Downloading MinGW..."
-          curl --output "$MINGW_FILENAME" -#L "$MINGW_URL"
-          tar -xf "$MINGW_FILENAME" -C build-env
-          mv build-env/$(tar -tf "$MINGW_FILENAME" | head -n 1 | cut -d '/' -f 1)/$(tar -tf "$MINGW_FILENAME" | head -n 2 | tail -n 1 | cut -d '/' -f 1) build-env/mingw
-          rm -f "$MINGW_FILENAME"
-
+          curl --output "build-env/$NDK_FILENAME" -#L "$NDK_URL"
+          echo "Unpacking NDK..."
+          unzip -q "build-env/$NDK_FILENAME" -d build-env
+          mv "build-env/$(unzip -Z1 "build-env/$NDK_FILENAME" | cut -d "/" -f 1 | head -n 1)" "build-env/android-ndk"
+          rm -f "build-env/$NDK_FILENAME"
+          echo ""
+          
+          echo "Downloading mingw..."
+          --output "build-env/$MINGW_FILENAME" -#L "$MINGW_URL"
+          echo "Unpacking mingw..."
+          tar -xf "build-env/$MINGW_FILENAME" -C "build-env"
+          mv "build-env/$(tar -tf "build-env/$MINGW_FILENAME" | cut -d "/" -f 1 | head -n 1)/$(tar -tf "build-env/$MINGW_FILENAME" | cut -d "/" -f 2 | head -n 1)" "build-env/mingw"
+          rm -f "build-env/$MINGW_FILENAME"
+          echo ""
+          
           # copy the build-env to Aurora-Runtime chroot
           sudo cp -r build-env /mnt/arch/Aurora-Runtime/build-env
 
