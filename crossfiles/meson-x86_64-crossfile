@@ -2,10 +2,10 @@
 pkg-config = '/usr/bin/pkg-config'
 cmake = '/usr/bin/cmake'
 
-c = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang'
-cpp = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++'
-ar = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
-strip = '/home/josegasm/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
+c = '/Aurora-Runtime/build-env/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang'
+cpp = '/Aurora-Runtime/build-env/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++'
+ar = '/Aurora-Runtime/build-env/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
+strip = '/Aurora-Runtime/build-env/android-ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
 
 [host_machine]
 system = 'linux'
