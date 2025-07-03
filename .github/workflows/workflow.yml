@@ -1,4 +1,69 @@
-name: workflow.yml
+name: Build and Release Aurora Runtime archives
+
 on:
+  push:
+    branches: "*"
+  workflow_dispatch:
 
 jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: "Install ArchLinux"
+        run: |
+          sudo apt update
+          sudo apt install -y arch-install-scripts wget
+          sudo mkdir -p /mnt/
+          
+          wget https://geo.mirror.pkgbuild.com/iso/latest/archlinux-bootstrap-x86_64.tar.zst
+          
+          sudo tar -xf archlinux-bootstrap-x86_64.tar.zst
+          sudo rm -f archlinux-bootstrap-x86_64.tar.zst
+          sudo mv root.x86_64 /mnt/arch
+          
+          sudo arch-chroot /mnt/arch bash -c "pacman-key --init && pacman-key --populate && sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist && sed -i "s/CheckSpace/#CheckSpace/g" /etc/pacman.conf && pacman -Syu --noconfirm base base-devel git cmake meson ninja bison flex python-pip wget python-mako python-pyyaml unzip 7zip glslang glib2-devel python-docutils xmlto fop libxslt python-docutils"
+
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: "Copy Repository to Chroot"
+        run: |
+          sudo cp -rf $PWD /mnt/arch/Aurora-Runtime
+
+      - name: "Setup Basic Android (x86_64) Runtime Environment (Required for Building x86_64 glib)"
+        run: |
+          git clone https://github.com/termux/termux-docker.git
+          sudo cp -rf termux-docker/system/x86 /mnt/arch/system
+          sudo chown -R $(whoami):$(whoami) /mnt/arch/system
+          sudo chmod 755 -R /mnt/arch/system
+      - name: "Download mingw-llvm red rose and ndk"
+        run: |
+          export NDK_URL="https://dl.google.com/android/repository/android-ndk-r26b-linux.zip"
+          export NDK_FILENAME="${NDK_URL##*/}"
+          export MINGW_URL="http://techer.pascal.free.fr/Red-Rose_MinGW-w64-Toolchain/Red-Rose-MinGW-w64-Posix-Urct-v12.0.0.r458.g03d8a40f5-Gcc-11.5.0.tar.xz"
+          export MINGW_FILENAME="${MINGW_URL##*/}"  
+          
+          echo "Downloading NDK..."
+          curl --output "cache/$NDK_FILENAME" -#L "$NDK_URL"
+          echo "Unpacking NDK..."
+          7z x "cache/$NDK_FILENAME" -aoa -o"cache" &> /dev/null
+          mv "cache/$(unzip -Z1 "cache/$NDK_FILENAME" | cut -d "/" -f 1 | head -n 1)" "cache/android-ndk"
+          rm -f "cache/$NDK_FILENAME"
+          echo ""
+          
+          echo "Downloading mingw..."
+          curl --output "cache/$MINGW_FILENAME" -#L "$MINGW_URL"
+          echo "Unpacking mingw..."
+          tar -xf "cache/$MINGW_FILENAME" -C "cache"
+          mv "cache/$(tar -tf "cache/$MINGW_FILENAME" | cut -d "/" -f 1 | head -n 1)/$(tar -tf "cache/$MINGW_FILENAME" | cut -d "/" -f 2 | head -n 1)" "cache/mingw"
+          rm -f "cache/$MINGW_FILENAME"
+          echo "" 	
+
+      - name: "Start Building"
+        run: |
+            sudo arch-chroot /mnt/arch bash -c "cd /Aurora-Runtime && ./build.sh"
