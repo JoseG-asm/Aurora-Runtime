@@ -43,31 +43,27 @@ jobs:
           sudo chmod 755 -R /mnt/arch/system
       - name: "Download mingw-llvm red rose and ndk"
         run: |
-          mkdir -p cache
+          mkdir -p build-env
+
           export NDK_URL="https://dl.google.com/android/repository/android-ndk-r29-beta2-linux.zip"
-          export NDK_FILENAME="android-ndk-r29-beta2-linux.zip"
+          export NDK_FILENAME="android-ndk.zip"
           export MINGW_URL="http://techer.pascal.free.fr/Red-Rose_MinGW-w64-Toolchain/Red-Rose-MinGW-w64-Posix-Urct-v12.0.0.r458.g03d8a40f5-Gcc-11.5.0.tar.xz"
-          export MINGW_FILENAME="Red-Rose-MinGW-w64-Posix-Urct-v12.0.0.r458.g03d8a40f5-Gcc-11.5.0.tar.xz"  
-          
+          export MINGW_FILENAME="mingw.tar.xz"
+
           echo "Downloading NDK..."
-          curl --output "cache/$NDK_FILENAME" -#L "$NDK_URL"
-          echo "Unpacking NDK..."
-          unzip -q "cache/$NDK_FILENAME" -d "cache"
-          mv "cache/$(unzip -Z1 "cache/$NDK_FILENAME" | cut -d "/" -f 1 | head -n 1)" "cache/android-ndk"
-          rm -f "cache/$NDK_FILENAME"
-          echo ""
-          
-          echo "Downloading mingw..."
-          curl --output "cache/$MINGW_FILENAME" -#L "$MINGW_URL"
-          echo "Unpacking mingw..."
-          tar -xf "cache/$MINGW_FILENAME" -C "cache"
-          mv "cache/$(tar -tf "cache/$MINGW_FILENAME" | cut -d "/" -f 1 | head -n 1)/$(tar -tf "cache/$MINGW_FILENAME" | cut -d "/" -f 2 | head -n 1)" "cache/mingw"
-          rm -f "cache/$MINGW_FILENAME"
-          echo "" 	
-          
-          ls "cache/mingw" && ls "cache/android-ndk"
-          
-          sudo cp -r cache /mnt/arch/cache
+          curl --output "$NDK_FILENAME" -#L "$NDK_URL"
+          unzip -q "$NDK_FILENAME" -d build-env
+          mv build-env/$(unzip -Z1 "$NDK_FILENAME" | head -n 1 | cut -d '/' -f 1) build-env/android-ndk
+          rm -f "$NDK_FILENAME"
+
+          echo "Downloading MinGW..."
+          curl --output "$MINGW_FILENAME" -#L "$MINGW_URL"
+          tar -xf "$MINGW_FILENAME" -C build-env
+          mv build-env/$(tar -tf "$MINGW_FILENAME" | head -n 1 | cut -d '/' -f 1)/$(tar -tf "$MINGW_FILENAME" | head -n 2 | tail -n 1 | cut -d '/' -f 1) build-env/mingw
+          rm -f "$MINGW_FILENAME"
+
+          # copy the build-env to Aurora-Runtime chroot
+          sudo cp -r build-env /mnt/arch/Aurora-Runtime/build-env
 
       - name: "Start Building"
         run: |

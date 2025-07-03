@@ -1,9 +1,9 @@
 export ARCH="x86_64"
 export ANDROID_SDK=29
-export CACHE="$PWD/cache"
-export NDK_PATH=$CACHE/android-ndk
+export BUILD_ENV="$PWD/build-env"
+export NDK_PATH=$BUILD_ENV/android-ndk
 export TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64
-export MINGW_PATH=$CACHE/mingw
+export MINGW_PATH=$BUILD_ENV/mingw
 export WORKDIR=$PWD/workdir
 export PATH="$TOOLCHAIN/bin:$MINGW_PATH/bin:$PATH"
 export WINETOOLS_PATH="$HOME/aurora-runtime/wine/build-tools"
