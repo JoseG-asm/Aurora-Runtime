@@ -1,6 +1,6 @@
 export ARCH="x86_64"
 export ANDROID_SDK=29
-export CACHE=$PWD/cache
+export CACHE="cache"
 export NDK_PATH=$CACHE/android-ndk
 export TOOLCHAIN=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64
 export MINGW_PATH=$CACHE/mingw
