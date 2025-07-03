@@ -53,7 +53,7 @@ jobs:
           echo "Downloading NDK..."
           curl --output "cache/$NDK_FILENAME" -#L "$NDK_URL"
           echo "Unpacking NDK..."
-          7z x "cache/$NDK_FILENAME" -aoa -o"cache" &> /dev/null
+          unzip -q "cache/$NDK_FILENAME" -d "cache"
           mv "cache/$(unzip -Z1 "cache/$NDK_FILENAME" | cut -d "/" -f 1 | head -n 1)" "cache/android-ndk"
           rm -f "cache/$NDK_FILENAME"
           echo ""
